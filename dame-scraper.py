@@ -17,7 +17,11 @@ url = dame_links[i]
 page = requests.get(url)
 soup = BeautifulSoup(page.content, "html.parser")
 
-info = soup.find_all("p")
+refs = soup.find_all('sup')
+for ref in refs:
+    ref.decompose()
+
+info = soup.find_all('p')
 for x in info:
     print(x.text.strip())
     print()
