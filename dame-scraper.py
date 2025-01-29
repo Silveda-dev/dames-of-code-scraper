@@ -43,6 +43,9 @@ def dame_finder():
             i += 1
             if i >= 5:
                 break
+        
+        print("You can find out more at: ", dame_links[chosen_dame])
+        print()
     
         #Removing selected dames to prevent repeats
         if len(dames) > 1:
