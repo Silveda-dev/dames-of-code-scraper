@@ -21,9 +21,13 @@ def dame_finder():
         ref.decompose()
 
     info = soup.find_all('p')
+    i = 0
     for x in info:
         print(x.text.strip())
         print()
+        i += 1
+        if i >= 5:
+            break
 
 print("Welcome to Dames of Code - recognising historic (and often forgotten) women in tech.\n\n")
 
