@@ -13,38 +13,55 @@ dame_links = ["https://en.wikipedia.org/wiki/Ada_Lovelace", "https://en.wikipedi
               "https://en.wikipedia.org/wiki/Jude_Milhon", "https://en.wikipedia.org/wiki/Pamela_Hardt-English", "https://en.wikipedia.org/wiki/Elizabeth_J._Feinler",
               "https://en.wikipedia.org/wiki/Wendy_Hall", "https://en.wikipedia.org/wiki/Karen_Catlin", "https://en.wikipedia.org/wiki/Cathy_Marshall_(hypertext_developer)",
               "https://en.wikipedia.org/wiki/Jaime_Levy"]
+finished = False
 
 def dame_finder():
-    #Generating dame of focus
-    i = random.randint(0, (len(dames)-1)) 
-    print(dames[i], "\n\n")
+    global finished
 
-    #Scraping Wikipedia page of dame
-    url = dame_links[i]
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
+    #Escape if all dames have been viewed
+    if finished:
+        print("You have viewed all dames in the dataset - thank you for your dedication.")
+    else:
+        #Generating dame of focus
+        chosen_dame = random.randint(0, (len(dames)-1)) 
+        print(dames[chosen_dame], "\n\n")
 
-    refs = soup.find_all('sup')
-    for ref in refs:
-        ref.decompose()
+        #Scraping Wikipedia page of dame
+        url = dame_links[chosen_dame]
+        page = requests.get(url)
+        soup = BeautifulSoup(page.content, "html.parser")
 
-    info = soup.find_all('p')
-    i = 0
-    for x in info:
-        print(x.text.strip())
-        print()
-        i += 1
-        if i >= 5:
-            break
+        refs = soup.find_all('sup')
+        for ref in refs:
+            ref.decompose()
+
+        info = soup.find_all('p')
+        i = 0
+        for x in info:
+            print(x.text.strip())
+            print()
+            i += 1
+            if i >= 5:
+                break
+    
+        #Removing selected dames to prevent repeats
+        if len(dames) > 1:
+            del dames[chosen_dame]
+            del dame_links[chosen_dame]
+        else:
+            finished = True
+
+        return True
 
 print("Welcome to Dames of Code - recognising historic (and often forgotten) women in tech.\n\n")
 
 cont = True
 
 while cont:
-    dame_finder()
-    check = input("Do you wish to find out about another dame (y/n)? ")
-    if check == 'n' or check == 'N' or check == 'no' or check == 'No':
-        cont = False
+    cont = dame_finder()
+    if cont:
+        check = input("Do you wish to find out about another dame (y/n)? ")
+        if check == 'n' or check == 'N' or check == 'no' or check == 'No':
+            cont = False
 
 print("Thank you for educating yourself.")
