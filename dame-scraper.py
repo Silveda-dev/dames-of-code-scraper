@@ -1,6 +1,9 @@
 import random
 import requests
 from bs4 import BeautifulSoup
+from flask import Flask
+from markupsafe import Markup
+app = Flask(__name__)
 
 dames = ["Ada Lovelace", "Grace Hopper", "Radia Perlman", "Betty Holberton (nee Snyder)", "Betty Jean Jennings",
          "Kathleen 'Kay' Antonelli (nee McNulty)", "Marlyn Meltzer (nee Wescoff)", "Frances Spence (nee Bilas)",
@@ -13,58 +16,44 @@ dame_links = ["https://en.wikipedia.org/wiki/Ada_Lovelace", "https://en.wikipedi
               "https://en.wikipedia.org/wiki/Jude_Milhon", "https://en.wikipedia.org/wiki/Pamela_Hardt-English", "https://en.wikipedia.org/wiki/Elizabeth_J._Feinler",
               "https://en.wikipedia.org/wiki/Wendy_Hall", "https://en.wikipedia.org/wiki/Karen_Catlin", "https://en.wikipedia.org/wiki/Cathy_Marshall_(hypertext_developer)",
               "https://en.wikipedia.org/wiki/Jaime_Levy"]
-finished = False
 
 def dame_finder():
-    global finished
+    scraped_dame = ""
 
-    #Escape if all dames have been viewed
-    if finished:
-        print("You have viewed all dames in the dataset - thank you for your dedication.")
-    else:
-        #Generating dame of focus
-        chosen_dame = random.randint(0, (len(dames)-1)) 
-        print(dames[chosen_dame], "\n\n")
+    #Generating dame of focus
+    chosen_dame = random.randint(0, (len(dames)-1)) 
+    scraped_dame += "<h1>"
+    scraped_dame += dames[chosen_dame]
+    scraped_dame += "</h1><br/>"
 
-        #Scraping Wikipedia page of dame
-        url = dame_links[chosen_dame]
-        page = requests.get(url)
-        soup = BeautifulSoup(page.content, "html.parser")
+    #Scraping Wikipedia page of dame
+    url = dame_links[chosen_dame]
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
 
-        refs = soup.find_all('sup')
-        for ref in refs:
-            ref.decompose()
+    refs = soup.find_all('sup')
+    for ref in refs:
+        ref.decompose()
 
-        info = soup.find_all('p')
-        i = 0
-        for x in info:
-            print(x.text.strip())
-            print()
-            i += 1
-            if i >= 5:
-                break
+    info = soup.find_all('p')
+    i = 0
+    for x in info:
+        scraped_dame += x.text.strip()
+        scraped_dame += "<br/><br/>"
+        i += 1
+        if i >= 5:
+            break
         
-        print("You can find out more at: ", dame_links[chosen_dame])
-        print()
+    scraped_dame += "You can find out more at: "
+    scraped_dame += '<a href="' + dame_links[chosen_dame] + '" target="_blank">'
+    scraped_dame += dame_links[chosen_dame]
+    scraped_dame += "</a>"
     
-        #Removing selected dames to prevent repeats
-        if len(dames) > 1:
-            del dames[chosen_dame]
-            del dame_links[chosen_dame]
-        else:
-            finished = True
+    return scraped_dame
 
-        return True
+@app.route('/')
+def dame_scraper():
+    return Markup(dame_finder())
 
-print("Welcome to Dames of Code - recognising historic (and often forgotten) women in tech.\n\n")
-
-cont = True
-
-while cont:
-    cont = dame_finder()
-    if cont:
-        check = input("Do you wish to find out about another dame (y/n)? ")
-        if check == 'n' or check == 'N' or check == 'no' or check == 'No':
-            cont = False
-
-print("Thank you for educating yourself.")
+if __name__ == '__main__':
+    app.run()
