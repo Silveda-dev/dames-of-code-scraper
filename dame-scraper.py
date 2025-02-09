@@ -38,6 +38,10 @@ def dame_finder():
     refs = soup.find_all('sup')
     for ref in refs:
         ref.decompose()
+    
+    profile_img = soup.find_all(class_='mw-file-element')[0]
+    img_link = profile_img.attrs['src']
+    scraped_dame += "<img src = '" + img_link + "' width='220' height='330'/><br/>"
 
     info = soup.find_all('p')
     i = 0
