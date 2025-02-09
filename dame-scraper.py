@@ -18,13 +18,14 @@ dame_links = ["https://en.wikipedia.org/wiki/Ada_Lovelace", "https://en.wikipedi
               "https://en.wikipedia.org/wiki/Jaime_Levy"]
 
 def dame_finder():
-    scraped_dame = ""
+    scraped_dame = '<h1 class="title">Dames of Code</h1>'
+    scraped_dame += '<h3>Recognising significant (and often forgotten) women in technology</h3>'
 
     #Generating dame of focus
     chosen_dame = random.randint(0, (len(dames)-1)) 
-    scraped_dame += "<h1>"
+    scraped_dame += "<h2 class='name'>"
     scraped_dame += dames[chosen_dame]
-    scraped_dame += "</h1><br/>"
+    scraped_dame += "</h2>"
 
     #Scraping Wikipedia page of dame
     url = dame_links[chosen_dame]
@@ -37,9 +38,12 @@ def dame_finder():
 
     info = soup.find_all('p')
     i = 0
+    current_para = ""
     for x in info:
-        scraped_dame += x.text.strip()
-        scraped_dame += "<br/><br/>"
+        current_para = x.text.strip()
+        if current_para != "":
+            scraped_dame += current_para
+            scraped_dame += "<br/><br/>"
         i += 1
         if i >= 5:
             break
