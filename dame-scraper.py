@@ -3,6 +3,8 @@ import requests
 from bs4 import BeautifulSoup
 from flask import Flask
 from markupsafe import Markup
+
+#Flask constructor using name of current module
 app = Flask(__name__)
 
 dames = ["Ada Lovelace", "Grace Hopper", "Radia Perlman", "Betty Holberton (nee Snyder)", "Betty Jean Jennings",
@@ -32,6 +34,7 @@ def dame_finder():
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
 
+    #Removes Wikipedia in-text citations (e.g. [1])
     refs = soup.find_all('sup')
     for ref in refs:
         ref.decompose()
@@ -39,6 +42,8 @@ def dame_finder():
     info = soup.find_all('p')
     i = 0
     current_para = ""
+
+    #Adds each of the first five paragraphs with appropriate line breaks
     for x in info:
         current_para = x.text.strip()
         if current_para != "":
@@ -47,19 +52,25 @@ def dame_finder():
         i += 1
         if i >= 5:
             break
-        
+
+    #Inserts link to scraped page for more information    
     scraped_dame += "You can find out more at: "
     scraped_dame += '<a href="' + dame_links[chosen_dame] + '" target="_blank">'
     scraped_dame += dame_links[chosen_dame]
     scraped_dame += "</a><br/><br/>"
     
+    #Creates 'regenerate' button which refreshes the page when clicked on, triggering a new dame to be shown
     scraped_dame += "<button id='reload' onclick='javascript:window.location.reload();'>Generate Another</button>"
 
     return scraped_dame
 
+#Binding default URL '/' to the dame_scraper function
 @app.route('/')
 def dame_scraper():
+    #Markup ensures that HTML formatting is preserved
     return Markup(dame_finder())
 
+#Driver function
 if __name__ == '__main__':
+    #Runs app on local development server
     app.run()
