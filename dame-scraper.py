@@ -51,8 +51,10 @@ def dame_finder():
     scraped_dame += "You can find out more at: "
     scraped_dame += '<a href="' + dame_links[chosen_dame] + '" target="_blank">'
     scraped_dame += dame_links[chosen_dame]
-    scraped_dame += "</a>"
+    scraped_dame += "</a><br/><br/>"
     
+    scraped_dame += "<button id='reload' onclick='javascript:window.location.reload();'>Generate Another</button>"
+
     return scraped_dame
 
 @app.route('/')
