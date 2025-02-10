@@ -23,6 +23,9 @@ def dame_finder():
     scraped_dame = '<h1 class="title">Dames of Code</h1>'
     scraped_dame += '<h3>Recognising significant (and often forgotten) women in technology</h3>'
 
+    #Creates 'regenerate' button which refreshes the page when clicked on, triggering a new dame to be shown
+    scraped_dame += "<button id='reload' onclick='javascript:window.location.reload();'>Generate Another</button>"
+    
     #Generating dame of focus
     chosen_dame = random.randint(0, (len(dames)-1)) 
     scraped_dame += "<h2 class='name'>"
@@ -39,6 +42,7 @@ def dame_finder():
     for ref in refs:
         ref.decompose()
     
+    #Scrape Wikipedia profile image
     profile_img = soup.find_all(class_='mw-file-element')[0]
     img_link = profile_img.attrs['src']
     scraped_dame += "<img src = '" + img_link + "' width='220' height='330'/><br/>"
@@ -62,9 +66,6 @@ def dame_finder():
     scraped_dame += '<a href="' + dame_links[chosen_dame] + '" target="_blank">'
     scraped_dame += dame_links[chosen_dame]
     scraped_dame += "</a><br/><br/>"
-    
-    #Creates 'regenerate' button which refreshes the page when clicked on, triggering a new dame to be shown
-    scraped_dame += "<button id='reload' onclick='javascript:window.location.reload();'>Generate Another</button>"
 
     return scraped_dame
 
