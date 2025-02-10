@@ -18,6 +18,7 @@ dame_links = ["https://en.wikipedia.org/wiki/Ada_Lovelace", "https://en.wikipedi
               "https://en.wikipedia.org/wiki/Jude_Milhon", "https://en.wikipedia.org/wiki/Pamela_Hardt-English", "https://en.wikipedia.org/wiki/Elizabeth_J._Feinler",
               "https://en.wikipedia.org/wiki/Wendy_Hall", "https://en.wikipedia.org/wiki/Karen_Catlin", "https://en.wikipedia.org/wiki/Cathy_Marshall_(hypertext_developer)",
               "https://en.wikipedia.org/wiki/Jaime_Levy"]
+no_image = ["St. Jude (aka Jude Milhon)", "Jean E. Sammet", "Mary Hawes", "Pamela Hardt-English", "Cathy Marshall"]
 
 def dame_finder():
     scraped_dame = '<h1 class="title">Dames of Code</h1>'
@@ -25,7 +26,7 @@ def dame_finder():
 
     #Creates 'regenerate' button which refreshes the page when clicked on, triggering a new dame to be shown
     scraped_dame += "<button id='reload' onclick='javascript:window.location.reload();'>Generate Another</button>"
-    
+
     #Generating dame of focus
     chosen_dame = random.randint(0, (len(dames)-1)) 
     scraped_dame += "<h2 class='name'>"
@@ -43,9 +44,11 @@ def dame_finder():
         ref.decompose()
     
     #Scrape Wikipedia profile image
-    profile_img = soup.find_all(class_='mw-file-element')[0]
-    img_link = profile_img.attrs['src']
-    scraped_dame += "<img src = '" + img_link + "' width='220' height='330'/><br/>"
+    #Only insert image if one exists
+    if dames[chosen_dame] not in no_image:
+        profile_img = soup.find_all(class_='mw-file-element')[0]
+        img_link = profile_img.attrs['src']
+        scraped_dame += "<img src = '" + img_link + "' width='250' height='330'/><br/>"
 
     info = soup.find_all('p')
     i = 0
