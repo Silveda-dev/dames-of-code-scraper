@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/style.css"/>
     <title>Dames of Code</title>
 </head>
 <body>
     <h1>Dames of Code</h1>
     <h3>Recognising significant (and often forgotten) women in technology</h3>
-    <button id='reload' onclick='javascript:window.location.reload();'>Generate Another</button>
+    <button id="reload" onclick="javascript:window.location.reload();"">Generate Another</button>
     {% block content %}{{content | safe}}{% endblock %}
 </body>
 </html>
