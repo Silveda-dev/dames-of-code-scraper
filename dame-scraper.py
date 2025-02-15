@@ -1,7 +1,7 @@
 import random
 import requests
 from bs4 import BeautifulSoup
-from flask import Flask
+from flask import Flask, render_template
 from markupsafe import Markup
 
 #Flask constructor using name of current module
@@ -21,15 +21,9 @@ dame_links = ["https://en.wikipedia.org/wiki/Ada_Lovelace", "https://en.wikipedi
 no_image = ["St. Jude (aka Jude Milhon)", "Jean E. Sammet", "Mary Hawes", "Pamela Hardt-English", "Cathy Marshall"]
 
 def dame_finder():
-    scraped_dame = '<h1 class="title">Dames of Code</h1>'
-    scraped_dame += '<h3>Recognising significant (and often forgotten) women in technology</h3>'
-
-    #Creates 'regenerate' button which refreshes the page when clicked on, triggering a new dame to be shown
-    scraped_dame += "<button id='reload' onclick='javascript:window.location.reload();'>Generate Another</button>"
-
     #Generating dame of focus
     chosen_dame = random.randint(0, (len(dames)-1)) 
-    scraped_dame += "<h2 class='name'>"
+    scraped_dame = "<h2 class='name'>"
     scraped_dame += dames[chosen_dame]
     scraped_dame += "</h2>"
 
@@ -76,7 +70,8 @@ def dame_finder():
 @app.route('/')
 def dame_scraper():
     #Markup ensures that HTML formatting is preserved
-    return Markup(dame_finder())
+    content = Markup(dame_finder())
+    return render_template("index.html", content=content)
 
 #Driver function
 if __name__ == '__main__':
