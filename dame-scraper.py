@@ -18,7 +18,7 @@ dame_links = ["https://en.wikipedia.org/wiki/Ada_Lovelace", "https://en.wikipedi
               "https://en.wikipedia.org/wiki/Jude_Milhon", "https://en.wikipedia.org/wiki/Pamela_Hardt-English", "https://en.wikipedia.org/wiki/Elizabeth_J._Feinler",
               "https://en.wikipedia.org/wiki/Wendy_Hall", "https://en.wikipedia.org/wiki/Karen_Catlin", "https://en.wikipedia.org/wiki/Cathy_Marshall_(hypertext_developer)",
               "https://en.wikipedia.org/wiki/Jaime_Levy"]
-no_image = ["St. Jude (aka Jude Milhon)", "Jean E. Sammet", "Mary Hawes", "Pamela Hardt-English", "Cathy Marshall"]
+no_image = ["St. Jude (aka Jude Milhon)", "Jean E. Sammet", "Mary Hawes", "Pamela Hardt-English", "Cathy Marshall", "Betty Jean Jennings"]
 
 def dame_finder():
     #Generating dame of focus
