@@ -82,22 +82,27 @@ h3 {
     color: #080808;
     background-color: whitesmoke;
     text-align: center;
-    margin: 0px;
+    margin: 0px 0px 10px 0px;
     font-weight: 500;
     font-size: 50px;
     padding: 20px auto;
+    border-top: 10px solid #080808;
+    border-bottom: 10px solid #080808;
 }
 
 #scraped-content p {
     background-color: #080808;
     color: whitesmoke;
-    padding: 20px 10px;
+    padding: 20px 20px;
+    margin: 0px 0px 10px 0px;
+    font-weight: 400;
+    font-size: 15px;
 }
 
 #scraped-content img {
     width: 20%;
     height: auto;
     display: block;
-    border: 10px solid whitesmoke;
-    margin: 20px auto 5px auto;
+    border: 10px solid #080808;
+    margin: 20px auto 20px auto;
 }
