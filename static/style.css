@@ -51,3 +51,27 @@ h3 {
     color: rgb(192, 29, 192);
     font-weight: 900;
 }
+
+#button-strip {
+    padding: 20px 0px 25px 0px;
+    background-image: linear-gradient(to right, rgb(255, 13, 53), rgb(192, 29, 192));
+    display: flex;
+    justify-content: center;
+}
+
+#reload {
+    background-color: #131313;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 10px 10px 2px -2px black;
+}
+
+#reload:hover {
+    color: gray;
+    background-color: #080808;
+}
