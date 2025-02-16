@@ -14,7 +14,7 @@
     <div id="button-strip">
         <button id="reload" onclick="javascript:window.location.reload();">Generate Another</button>
     </div>
-    <div class="scraped-content">
+    <div id="scraped-content">
         {% block content %}{{content | safe}}{% endblock %}
     </div>
 </body>
