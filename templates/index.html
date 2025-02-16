@@ -7,9 +7,15 @@
     <title>Dames of Code</title>
 </head>
 <body>
-    <h1>Dames of Code</h1>
-    <h3>Recognising significant (and often forgotten) women in technology</h3>
-    <button id="reload" onclick="javascript:window.location.reload();"">Generate Another</button>
-    {% block content %}{{content | safe}}{% endblock %}
+    <div id="header">
+        <h1>Dames of <span class="code-pop">{Code}</span></h1>
+        <h3>Recognising significant (and often forgotten) women in technology</h3>
+    </div>
+    <div id="button-strip">
+        <button id="reload" onclick="javascript:window.location.reload();">Generate Another</button>
+    </div>
+    <div class="scraped-content">
+        {% block content %}{{content | safe}}{% endblock %}
+    </div>
 </body>
 </html>
