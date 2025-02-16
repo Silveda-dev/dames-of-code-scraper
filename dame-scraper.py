@@ -42,7 +42,7 @@ def dame_finder():
     if dames[chosen_dame] not in no_image:
         profile_img = soup.find_all(class_='mw-file-element')[0]
         img_link = profile_img.attrs['src']
-        scraped_dame += "<img src = '" + img_link + "' width='250' height='330'/><br/>"
+        scraped_dame += "<img src = '" + img_link + "'/><br/>"
 
     info = soup.find_all('p')
     i = 0
