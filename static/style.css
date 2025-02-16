@@ -124,3 +124,8 @@ h3 {
     color: whitesmoke;
     font-weight: 900;
 }
+
+a {
+    font-weight: 600;
+    color:rgb(192, 29, 192);
+}
