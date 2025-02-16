@@ -23,7 +23,7 @@ no_image = ["St. Jude (aka Jude Milhon)", "Jean E. Sammet", "Mary Hawes", "Pamel
 def dame_finder():
     #Generating dame of focus
     chosen_dame = random.randint(0, (len(dames)-1)) 
-    scraped_dame = "<h2 class='name'>"
+    scraped_dame = "<h2>"
     scraped_dame += dames[chosen_dame]
     scraped_dame += "</h2>"
 
@@ -42,7 +42,7 @@ def dame_finder():
     if dames[chosen_dame] not in no_image:
         profile_img = soup.find_all(class_='mw-file-element')[0]
         img_link = profile_img.attrs['src']
-        scraped_dame += "<img src = '" + img_link + "'/><br/>"
+        scraped_dame += "<img src = '" + img_link + "'/>"
 
     info = soup.find_all('p')
     i = 0
@@ -52,17 +52,18 @@ def dame_finder():
     for x in info:
         current_para = x.text.strip()
         if current_para != "":
+            scraped_dame += "<p>"
             scraped_dame += current_para
-            scraped_dame += "<br/><br/>"
+            scraped_dame += "</p>"
         i += 1
         if i >= 5:
             break
 
     #Inserts link to scraped page for more information    
-    scraped_dame += "You can find out more at: "
+    scraped_dame += "<p>You can find out more at: "
     scraped_dame += '<a href="' + dame_links[chosen_dame] + '" target="_blank">'
     scraped_dame += dame_links[chosen_dame]
-    scraped_dame += "</a><br/><br/>"
+    scraped_dame += "</a></p>"
 
     return scraped_dame
 
