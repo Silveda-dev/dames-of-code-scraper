@@ -16,7 +16,7 @@ body {
     border: 0px;
 }
 
-h1, h2, h3 {
+h1, h2, h3, #footer p {
     font-family: 'Lexend', sans-serif;
 }
 
@@ -105,4 +105,22 @@ h3 {
     display: block;
     border: 10px solid #080808;
     margin: 20px auto 20px auto;
+}
+
+#footer {
+    background-image: linear-gradient(to right, rgb(255, 13, 53), rgb(192, 29, 192)); 
+}
+
+#footer p {
+    color: #080808;
+    font-size: 20px;
+    font-weight: 700;  
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+#name-pop {
+    color: whitesmoke;
+    font-weight: 900;
 }
