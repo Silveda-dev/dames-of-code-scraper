@@ -74,20 +74,30 @@ h3 {
 
 #scraped-content {
     background-image: linear-gradient(to right, rgb(255, 13, 53), rgb(192, 29, 192));
+    display: flex;
+    flex-direction: column;
 }
 
 #scraped-content h2 {
     color: #080808;
     background-color: whitesmoke;
     text-align: center;
-    margin-top: 0px;
+    margin: 0px;
     font-weight: 500;
     font-size: 50px;
-    padding: 20px 0px;
+    padding: 20px auto;
 }
 
 #scraped-content p {
     background-color: #080808;
     color: whitesmoke;
     padding: 20px 10px;
+}
+
+#scraped-content img {
+    width: 20%;
+    height: auto;
+    display: block;
+    border: 10px solid whitesmoke;
+    margin: 20px auto 5px auto;
 }
