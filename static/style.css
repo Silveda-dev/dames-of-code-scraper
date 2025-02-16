@@ -26,10 +26,6 @@ h1 {
     margin: 30px 0px;
 }
 
-h2 {
-    font-weight: 500;
-}
-
 h3 {
     font-weight: 500;
     font-size: 25px;
@@ -74,4 +70,24 @@ h3 {
 #reload:hover {
     color: gray;
     background-color: #080808;
+}
+
+#scraped-content {
+    background-image: linear-gradient(to right, rgb(255, 13, 53), rgb(192, 29, 192));
+}
+
+#scraped-content h2 {
+    color: #080808;
+    background-color: whitesmoke;
+    text-align: center;
+    margin-top: 0px;
+    font-weight: 500;
+    font-size: 50px;
+    padding: 20px 0px;
+}
+
+#scraped-content p {
+    background-color: #080808;
+    color: whitesmoke;
+    padding: 20px 10px;
 }
