@@ -52,13 +52,13 @@ def dame_finder():
     while i < 5 and i < len(info):
         current_para = info[i].text.strip()
         if current_para != "":
-            scraped_dame += "<p>"
+            scraped_dame += "<p class='scraped-content'>"
             scraped_dame += current_para
             scraped_dame += "</p>"
         i += 1
 
     #Inserts link to scraped page for more information    
-    scraped_dame += "<p>You can find out more at: "
+    scraped_dame += "<p id='find-more'>You can find out more at: "
     scraped_dame += '<a href="' + dame_links[chosen_dame] + '" target="_blank">'
     scraped_dame += dame_links[chosen_dame]
     scraped_dame += "</a></p>"
