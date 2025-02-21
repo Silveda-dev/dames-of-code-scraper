@@ -16,7 +16,7 @@ body {
     border: 0px;
 }
 
-h1, h2, h3, #footer p {
+h1, h2, h3, #footer p, #find-more {
     font-family: 'Lexend', sans-serif;
 }
 
@@ -90,7 +90,7 @@ h3 {
     border-bottom: 10px solid #080808;
 }
 
-#scraped-content p {
+.scraped-content {
     background-color: #080808;
     color: whitesmoke;
     padding: 20px 20px;
@@ -128,4 +128,13 @@ h3 {
 a {
     font-weight: 600;
     color:rgb(192, 29, 192);
+}
+
+#find-more {
+    background-color: #131313;
+    color: whitesmoke;
+    text-align: center;
+    padding: 30px 30px;
+    font-size: 25px;
+    font-weight: 600;
 }
