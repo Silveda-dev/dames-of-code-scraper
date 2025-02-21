@@ -49,15 +49,13 @@ def dame_finder():
     current_para = ""
 
     #Adds each of the first five paragraphs with appropriate line breaks
-    for x in info:
-        current_para = x.text.strip()
+    while i < 5 and i < len(info):
+        current_para = info[i].text.strip()
         if current_para != "":
             scraped_dame += "<p>"
             scraped_dame += current_para
             scraped_dame += "</p>"
         i += 1
-        if i >= 5:
-            break
 
     #Inserts link to scraped page for more information    
     scraped_dame += "<p>You can find out more at: "
