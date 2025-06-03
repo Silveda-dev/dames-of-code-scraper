@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 from flask import Flask, render_template
 from markupsafe import Markup
 
-#Flask constructor using name of current module
 app = Flask(__name__)
 
 dames = ["Ada Lovelace", "Grace Hopper", "Radia Perlman", "Betty Holberton (nee Snyder)", "Betty Jean Jennings",
@@ -27,7 +26,7 @@ def dame_finder():
     scraped_dame += dames[chosen_dame]
     scraped_dame += "</h2>"
 
-    #Scraping Wikipedia page of dame
+    #Scrapes Wikipedia page
     url = dame_links[chosen_dame]
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
@@ -37,8 +36,7 @@ def dame_finder():
     for ref in refs:
         ref.decompose()
     
-    #Scrape Wikipedia profile image
-    #Only insert image if one exists
+    #Scrape Wikipedia profile image and only insert image if one exists
     if dames[chosen_dame] not in no_image:
         profile_img = soup.find_all(class_='mw-file-element')[0]
         img_link = profile_img.attrs['src']
@@ -48,7 +46,7 @@ def dame_finder():
     i = 0
     current_para = ""
 
-    #Adds each of the first five paragraphs with appropriate line breaks
+    #Adds only first five paragraphs of profile
     while i < 5 and i < len(info):
         current_para = info[i].text.strip()
         if current_para != "":
@@ -65,14 +63,11 @@ def dame_finder():
 
     return scraped_dame
 
-#Binding default URL '/' to the dame_scraper function
 @app.route('/')
 def dame_scraper():
     #Markup ensures that HTML formatting is preserved
     content = Markup(dame_finder())
     return render_template("index.html", content=content)
 
-#Driver function
 if __name__ == '__main__':
-    #Runs app on local development server
     app.run()
